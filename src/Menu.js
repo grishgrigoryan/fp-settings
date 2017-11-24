@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
+import {getUserName} from './authClient'
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import LabelIcon from 'material-ui/svg-icons/action/label';
 import { translate, DashboardMenuItem, MenuItemLink } from 'admin-on-rest';
@@ -8,18 +9,20 @@ import { translate, DashboardMenuItem, MenuItemLink } from 'admin-on-rest';
 
 
 import { PartnerIcon } from './partner';
-import { VisitorIcon } from './visitors';
-import { CommandIcon } from './commands';
-import { ProductIcon } from './products';
-import { CategoryIcon } from './categories';
-import { ReviewIcon } from './reviews';
 
 const items = [
+    { url:"settings/0",primaryText:"Settings", icon: <SettingsIcon /> },
     { name: 'settings_schema',primaryText:"Schema", icon: <SettingsIcon /> },
     { name: 'fields',primaryText:"Fields", icon: <SettingsIcon /> },  
     { name: 'partners', primaryText:"Partners",icon: <PartnerIcon /> },
     { name: 'users',primaryText:"Users", icon: <PartnerIcon /> },
 ];
+
+const getLinksToShow = ()=>{
+    if(getUserName()=="ui" || getUserName()=="api"){
+
+    }
+}
 
 const styles = {
     main: {
@@ -32,17 +35,10 @@ const styles = {
 
 const Menu = ({ onMenuTap, translate, logout }) => (
     <div style={styles.main}>
-        <DashboardMenuItem onClick={onMenuTap} />
-        <MenuItemLink
-            to="/settings/0"
-            primaryText="Settings"
-            leftIcon={<SettingsIcon />}
-            onClick={onMenuTap}
-        />
         {items.map(item => (
             <MenuItemLink
-                key={item.name}
-                to={`/${item.name}`}
+                key={item.name || item.primaryText }
+                to={`/${item.url || item.name}`}
                 primaryText={item.primaryText || item.name}
                 leftIcon={item.icon}
                 onClick={onMenuTap}

@@ -1,5 +1,7 @@
 import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_CHECK, AUTH_ERROR } from 'admin-on-rest';
-
+export function getUserName(){
+    return     localStorage.getItem('username');
+}
 export default (type, params) => {
     if (type === AUTH_LOGIN) {
         const { username } = params;

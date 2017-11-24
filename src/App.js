@@ -5,12 +5,9 @@ import { Admin, Delete, Resource } from 'admin-on-rest';
 import './App.css';
 
 import authClient from './authClient';
-import sagas from './sagas';
-import themeReducer from './themeReducer';
 import Login from './Login';
 import Layout from './Layout';
 import Menu from './Menu';
-import { Dashboard } from './dashboard';
 import customRoutes from './routes';
 import translations from './i18n';
 
@@ -35,11 +32,8 @@ class App extends Component {
             <Admin
                 title="FreedomPlus settings"
                 restClient={restClient}
-                customReducers={{ theme: themeReducer }}
-                customSagas={sagas}
                 customRoutes={customRoutes}
                 authClient={authClient}
-                dashboard={Dashboard}
                 loginPage={Login}
                 appLayout={Layout}
                 menu={Menu}
