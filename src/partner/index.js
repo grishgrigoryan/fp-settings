@@ -23,6 +23,9 @@ import { List,Create,Delete,
       FormTab} from 'admin-on-rest';
 import Icon from 'material-ui/svg-icons/social/person';
 import EditButton from '../buttons/EditButton';
+import {getUserName} from '../authClient'
+import {EmbeddedArrayInput, EmbeddedArrayField} from "aor-embedded-array";
+
 
 
 export const PartnerIcon = Icon;
@@ -53,58 +56,104 @@ export const PartnerList = (props) => (
 export const PartnerEdit = (props) => (
     <Edit title={<PartnerTitile/>} {...props}>
         <TabbedForm>
+    
             <FormTab label="base">
                 <TextInput source="name" label="Name" />
                 <TextInput source="credential_username" label="username" />
                 <TextInput source="credential_password" label="password" />
-                <TextInput type="email" source="contact_email" label="Email" validation={{ email: true }}  />
-                <TextInput source="contact_name" label="Name" />
+                <TextInput type="email" source="contact_email" label="Contact email" validation={{ email: true }}  />
+                <TextInput source="contact_name" label="Contact Name" />
             </FormTab>
-            <FormTab label="loan-processing">
-                <NumberInput style={{ width: 544 }} source="loan-processing-partner_marketing_rate_table_allocation" label="Rate_table_allocation" />
-                <SelectInput label="discount_pricing_grid" source="loan-processing-partner_discount_pricing_grid" choices={[{ id: 'HIGHDISCOUNT', name: 'HIGHDISCOUNT' },{ id: 'NODISCOUNT', name: 'NODISCOUNT' }]}/>
-                <BooleanInput source="loan-processing-partner_enable_counter_offers" label="Counter Offers" />
+            {
+                getUserName() =='ui' ? (
+                        null
+                    ) : (
+                        <FormTab label="loan-processing">
+                            <NumberInput style={{ width: 544 }} source="loan-processing-partner_marketing_rate_table_allocation" label="Rate_table_allocation" />
+                            <SelectInput label="discount_pricing_grid" source="loan-processing-partner_discount_pricing_grid" choices={[{ id: 'HIGHDISCOUNT', name: 'HIGHDISCOUNT' },{ id: 'NODISCOUNT', name: 'NODISCOUNT' }]}/>
+                            <BooleanInput source="loan-processing-partner_enable_counter_offers" label="Counter Offers" />
+                        </FormTab>
+                    )
+            }
+            {
+                getUserName() =='ui' ? (
+                        null
+                    ) : (
+                        <FormTab label="lead-distribution">
+                            <NullableBooleanInput source="lead-distribution_wcb_release_cusp"  label="WCB release cusp"/>
+                        </FormTab>
+                    )
+            }
+            {
+                getUserName() =='api' ? (
+                        null
+                    ) : (
+                        <FormTab label="ui">
+                            <TextInput source="ui_title"  />
+                            <LongTextInput source="ui_description" label="Description" />
+                            <LongTextInput source="ui_footer_disclaimer" label="Disclaimer" />
+                        </FormTab>
+                    )
+            }
+            {
+                getUserName() =='api' ? (
+                        null
+                    ) : (
+                    <FormTab label="Tracking">
+                        <TextInput source="tracking_utm_source"  />
 
-            </FormTab>
-            <FormTab label="lead-distribution">
-                <NullableBooleanInput source="lead-distribution_wcb_release_cusp"  label="WCB release cusp"/>
-            </FormTab>
-            <FormTab label="ui">
-                <TextInput source="ui_title"  />
-                <LongTextInput source="ui_description" label="Description" />
-                <LongTextInput source="ui_footer_disclaimer" label="Disclaimer" />
-            </FormTab>
-
-            <FormTab label="Tracking">
-                <TextInput source="tracking_utm_source"  />
-
-                <TextInput source="tracking_utm_medium"  />
-                <TextInput source="tracking_utm_campaign"  />
-                <TextInput source="tracking_utm_adgroup"  />
-                <TextInput source="tracking_utm_term"  />
-                <TextInput source="tracking_utm_lander"  />
-                <TextInput source="tracking_utm_trans"  />
-                <TextInput source="tracking_utm_search_term"  />
-                <TextInput source="tracking_utm_publisher"  />
-                <TextInput source="tracking_utm_content"  />
-                <TextInput source="tracking_utm_creative_type"  />
-                <TextInput source="tracking_utm_adcampaign"  />
-                <TextInput source="tracking_utm_http_referer"  />
-                
-            </FormTab>
-            <FormTab label="knock-out">
-                <SelectArrayInput options={{ fullWidth: true }} label="Accepted States" source="knock-out_accepted_states"  choices={stateList} />
-                <TextInput source="knock-out_minimum_loan_amount"  label="Minimum loan amount"   />
-                <TextInput source="knock-out_maximum_loan_amount"   label="Maximum loan amount"  />
-                
-            </FormTab>
-            <FormTab label="branding">
-                <TextInput source="branding_title" landing="title"  />
-                <LongTextInput source="branding_description" landing="description" />        
-                <FileInput source="branding_logo" label="Logo">
-                    <FileField source="branding_logo" title="title" />
-                </FileInput>
-            </FormTab>
+                        <TextInput source="tracking_utm_medium"  />
+                        <TextInput source="tracking_utm_campaign"  />
+                        <TextInput source="tracking_utm_adgroup"  />
+                        <TextInput source="tracking_utm_term"  />
+                        <TextInput source="tracking_utm_lander"  />
+                        <TextInput source="tracking_utm_trans"  />
+                        <TextInput source="tracking_utm_search_term"  />
+                        <TextInput source="tracking_utm_publisher"  />
+                        <TextInput source="tracking_utm_content"  />
+                        <TextInput source="tracking_utm_creative_type"  />
+                        <TextInput source="tracking_utm_adcampaign"  />
+                        <TextInput source="tracking_utm_http_referer"  />
+                        
+                    </FormTab>
+                    )
+            }
+             {
+                getUserName() =='api' ? (
+                        null
+                    ) : (
+                    <FormTab label="Phone">
+                        <EmbeddedArrayInput source="phone_number" allowRemove={true}>
+                            <TextInput source="number" label="Number"/>
+                            <SelectInput source="type" label="Type" choices={[ {'id': 'Costumer Care', name: 'Costumer Care' },{'id': 'Sales', name: 'Sales' }]}/>
+                        </EmbeddedArrayInput>
+                    </FormTab>
+                    )
+            }
+            {
+                getUserName() =='ui' ? (
+                        null
+                    ) : (
+                        <FormTab label="knock-out">
+                            <SelectArrayInput options={{ fullWidth: true }} label="Accepted States" source="knock-out_accepted_states"  choices={stateList} />
+                            <TextInput source="knock-out_minimum_loan_amount"  label="Minimum loan amount"   />
+                            <TextInput source="knock-out_maximum_loan_amount"   label="Maximum loan amount"  />
+                        </FormTab>  
+                    )
+            }
+           {
+                getUserName() =='api' ? (
+                        null
+                    ) : (
+                            <FormTab label="branding">
+                            <TextInput source="branding_title" landing="title"  />
+                            <LongTextInput source="branding_description" landing="description" />        
+                            <FileInput source="branding_logo" label="Logo">
+                            <FileField source="branding_logo" title="title" />
+                            </FileInput>
+                        </FormTab>
+                    )
+            }  
         </TabbedForm>
     </Edit>
 );

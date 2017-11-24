@@ -4515,28 +4515,306 @@ data = {
   "settings_schema":[
     {
       "type":"loan-processing",
-      "fields_id":[ 6,7]
+      "fields":[
+        {
+          "name" : "concurent_application_check",
+          "type" : "boolean",
+          "default" : true,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "max_application_per_day",
+          "type" : "number",
+          "default" : 1000,
+          "choices" : [],
+          "is_active" : true
+        }
+      ]
     },
     {
       "type":"ui",
-      "fields_id":[8,9,10]
+      "fields":[
+        {
+          "name" : "title",
+          "type" : "string",
+          "default" : "FreedomPlus",
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "description",
+          "type" : "text",
+          "default" : "FreedomPlus Description",
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "description",
+          "type" : "html",
+          "default" : "FreedomPlus Footer Disclaimer<i></i>",
+          "choices" : [],
+          "is_active" : true
+        }
+      ]
     },
     {
       "type":"lead-distribution",
-      "fields_id":[5]
+      "fields":[
+        {
+          "name" : "wcb_release_cusp",
+          "type" : "boolean",
+          "default" : true,
+          "choices" : [],
+          "is_active" : true
+        }
+      ]
     },
     {
       "type":"api",
-      "fields_id":[4]
+      "fields":[
+        {
+          "name" : "run_knock_out",
+          "type" : "boolean",
+          "default" : true,
+          "choices" : [],
+          "is_active" : true
+        }
+      ]
     },
     {
       "type":"knock-out",
-      "fields_id":[1,2,3]
+      "fields":[
+        {
+          "name" : "accepted_states",
+          "type" : "multi_choice",
+          "default" : true,
+          "choices" : [ "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY" ],
+          "is_active" : true
+        },
+        {
+          "name" : "minimum_loan_amount",
+          "type" : "number",
+          "default" : 14000,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "maximum_loan_amount",
+          "type" : "number",
+          "default" : 35000,
+          "choices" : [],
+          "is_active" : true
+        }
+      ]
+    }
+  ],
+  "partner_schema":[
+    {
+      "type":"loan-processing",
+      "fields":[
+        {
+          "name" : "marketing_rate_table_allocation",
+          "type" : "integer",
+          "default" : 100,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "discount_pricing_grid",
+          "type" : "enum",
+          "default" : 1000,
+          "choices" : ["HIGHDISCOUNT","NODISCOUNT"],
+          "is_active" : true
+        },
+        {
+          "name" : "enable_counter_offers",
+          "type" : "boolean",
+          "default" : true,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "counter_offers_terms",
+          "type" : "multi_choice",
+          "default" : [24,36],
+          "choices" : [24,36,48,60],
+          "is_active" : true
+        }
+      ]
     },
     {
-      "type":"branding",
-      "fields_id":[9,10,13]
+      "type":"ui",
+      "fields":[
+        {
+          "name" : "title",
+          "type" : "string",
+          "default" : "FreedomPlus",
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "description",
+          "type" : "text",
+          "default" : "FreedomPlus Description",
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "description",
+          "type" : "html",
+          "default" : "FreedomPlus Footer Disclaimer<i></i>",
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "flowtype",
+          "type" : "enum",
+          "default" : "regular",
+          "choices" : ["mail","regular","short-prequal"],
+          "is_active" : true
+        },
+        {
+          "name" : "rate_disclosure",
+          "type" : "text",
+          "default" : null,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "meta_keywords",
+          "type" : "text",
+          "default" : "personal loans, freedomplus loans",
+          "choices" : [],
+          "is_active" : true
+        }
+      ]
     },
+    {
+      "type":"lead-distribution",
+      "fields":[
+        {
+          "name" : "ready_to_release_after",
+          "type" : "enum",
+          "default" : true,
+          "choices" : ["PREQUAL","FULLAPP"],
+          "is_active" : true
+        },
+        {
+          "name" : "npv_threshold",
+          "type" : "number",
+          "default" : 100,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "fuse_control_group_percent",
+          "type" : "number",
+          "default" : 100,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "skip_fuse",
+          "type" : "boolean",
+          "default" : true,
+          "choices" : [],
+          "is_active" : true
+        }
+      ]
+    },
+    {
+      "type":"api",
+      "fields":[
+        {
+          "name" : "accept",
+          "type" : "boolean",
+          "default" : true,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "synchronous",
+          "type" : "boolean",
+          "default" : true,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "return_offers",
+          "type" : "boolean",
+          "default" : true,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "return_reject_reason",
+          "type" : "boolean",
+          "default" : true,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "day_phone_required",
+          "type" : "boolean",
+          "default" : true,
+          "choices" : [],
+          "is_active" : true
+        }
+      ]
+    },
+    {
+      "type":"knock-out",
+      "fields":[
+        {
+          "name" : "accepted_states",
+          "type" : "multi_choice",
+          "default" : true,
+          "choices" : [ "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY" ],
+          "is_active" : true
+        },
+        {
+          "name" : "minimum_loan_amount",
+          "type" : "number",
+          "default" : 14000,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "maximum_loan_amount",
+          "type" : "number",
+          "default" : 35000,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "minimum_credit_rating",
+          "type" : "number",
+          "default" : 600,
+          "choices" : [],
+          "is_active" : true
+        }
+      ]
+    },
+    {
+      "type":"contact",
+      "fields":[
+        {
+          "name" : "email",
+          "type" : "string",
+          "default" : null,
+          "choices" : [],
+          "is_active" : true
+        },
+        {
+          "name" : "name",
+          "type" : "string",
+          "default" : null,
+          "choices" : [],
+          "is_active" : true
+        }
+      ]
+    }
   ],
   "fields":[{
     id:1,

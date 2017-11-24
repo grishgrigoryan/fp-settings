@@ -10,13 +10,12 @@ import Layout from './Layout';
 import Menu from './Menu';
 import customRoutes from './routes';
 import translations from './i18n';
-
 import { PartnerList,PartnerEdit,PartnerCreate,PartnerDelete} from './partner';
 import { SettingsList,SettingsEdit} from './settings';
 import { UserList,UserEdit,UserCreate} from './users';
 import restClient from './restClient';
 import fakeRestServer from './restServer';
-import { SettingsSchemaList, SettingsSchemaEdit, FieldEdit, FieldList, FieldCreate } from './schema/index';
+import { SettingsSchemaList, SettingsSchemaEdit, PartnerSchemaList, PartnerSchemaEdit} from './schema/index';
 
 class App extends Component {
     componentWillMount() {
@@ -39,11 +38,11 @@ class App extends Component {
                 menu={Menu}
                 messages={translations}
             >
-                <Resource name="settings" list={SettingsList} edit={SettingsEdit}  />
                 <Resource name="partners" list={PartnerList} edit={PartnerEdit} create={PartnerCreate} remove={PartnerDelete} />
+                <Resource name="settings" list={SettingsList} edit={SettingsEdit}  />
                 <Resource name="users" list={UserList}  edit={UserEdit} create={UserCreate}/>                
                 <Resource name="settings_schema" list={SettingsSchemaList} edit={SettingsSchemaEdit}/>
-                <Resource name="fields" list={FieldList} edit={FieldEdit} create={FieldCreate} remove/>
+                <Resource name="partner_schema" list={PartnerSchemaList} edit={PartnerSchemaEdit}/>
             </Admin>
         );
     }

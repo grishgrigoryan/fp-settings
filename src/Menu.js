@@ -3,24 +3,31 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import {getUserName} from './authClient'
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
+import SchemaIcon from 'material-ui/svg-icons/action/settings-ethernet';
+import PartnerIcon from 'material-ui/svg-icons/maps/transfer-within-a-station';
+import UserIcon from 'material-ui/svg-icons/social/person';
+
 import LabelIcon from 'material-ui/svg-icons/action/label';
 import { translate, DashboardMenuItem, MenuItemLink } from 'admin-on-rest';
 
 
 
-import { PartnerIcon } from './partner';
+//import { PartnerIcon } from './partner';
 
 const items = [
     { url:"settings/0",primaryText:"Settings", icon: <SettingsIcon /> },
-    { name: 'settings_schema',primaryText:"Schema", icon: <SettingsIcon /> },
-    { name: 'fields',primaryText:"Fields", icon: <SettingsIcon /> },  
     { name: 'partners', primaryText:"Partners",icon: <PartnerIcon /> },
-    { name: 'users',primaryText:"Users", icon: <PartnerIcon /> },
+    { name: 'users',primaryText:"Users", icon: <UserIcon /> },
+    { name: 'settings_schema',primaryText:"Settings Schema", icon: <SchemaIcon /> },
+    { name: 'partner_schema',primaryText:"Partner Schema", icon: <SchemaIcon /> },  
+
 ];
 
 const getLinksToShow = ()=>{
     if(getUserName()=="ui" || getUserName()=="api"){
-
+        return items.filter(item=> item.name =="partners" || item.primaryText =="Settings" )
+    }else{
+        return items
     }
 }
 
@@ -35,7 +42,7 @@ const styles = {
 
 const Menu = ({ onMenuTap, translate, logout }) => (
     <div style={styles.main}>
-        {items.map(item => (
+        {getLinksToShow().map(item => (
             <MenuItemLink
                 key={item.name || item.primaryText }
                 to={`/${item.url || item.name}`}
